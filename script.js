@@ -7,6 +7,7 @@ function start(){
         window.addEventListener("devicemotion",handleMotion);
         document.getElementById("start_button").innerHTML="Stop";
         is_runnning=true;
+        last_timer=timer;
     }else{
         window.removeEventListener("devicemotion",handleMotion);
         document.getElementById("start_button").innerHTML="Start";
@@ -24,10 +25,18 @@ var speed_x=0;
 var speed_y=0;
 var locat_x=0;
 var locat_y=0;
+var timer=0;
+var last_timer=0;
+
+function clock(){
+    timer++;
+}
+setInterval(clock,1);
+
 function handleMotion(event){
     var ac_x=event.acceleration.x;
     var ac_y=event.acceleration.y;
-    var int=event.interval/1000;
+    var int=(timer-last_timer)/1000;
     var new_speed_x=speed_x+ac_x*int;
     var new_speed_y=speed_y+ac_y*int;
     locat_x+=(speed_x+new_speed_x)*int/2;
@@ -41,4 +50,5 @@ function handleMotion(event){
     updateFieldIfNotNull("locat_x",locat_x);
     updateFieldIfNotNull("locat_y",locat_y);
     updateFieldIfNotNull("interval",int);
+    last_timer=timer;
 }
