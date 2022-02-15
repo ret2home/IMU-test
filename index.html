@@ -4,7 +4,7 @@
         body{
             margin: 100px;
         }
-        #start_button{
+        .button{
             width: 100px;
             height: 50px;
         }
@@ -22,8 +22,11 @@
         }
     </style>
     <body>
-        <button onclick="start()" id="start_button">Start</button>
+        <button onclick="start()" class="button">Start</button>
+        <button onclick="filterUp()" class="button">Filter Up</button>
+        <button onclick="filterDown()" class="button">Filter Down</button>
         <ul>
+            <li>filter : <span id="filter"></span></li>
             <li>Accel_x : <span id="accel_x"></span></li>
             <li>Accel_y : <span id="accel_y"></span></li>
             <li>Speed_x : <span id="speed_x"></span></li>

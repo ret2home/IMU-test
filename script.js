@@ -35,7 +35,7 @@ var locat_x=0,locat_y=0;
 var timer=0,last_timer=0;
 var lowpass_x=0,highpass_x=0;
 var lowpass_y=0,highpass_y=0;
-var filter=0.95;
+var filter=0.9;
 var old_ac_x=0,old_ac_y=0;
 var old_speed_x=0,old_speed_y=0;
 function clock(){
@@ -43,6 +43,12 @@ function clock(){
 }
 setInterval(clock,10);
 
+function filterUp(){
+    filter+=0.05;
+}
+function filterDown(){
+    filter-=0.05;
+}
 function handleMotion(event){
     var ac_x=event.acceleration.x;
     var ac_y=event.acceleration.y;
@@ -74,6 +80,7 @@ function handleMotion(event){
     speed_y=new_speed_y;
     */
 
+    updateFieldIfNotNull("filter",filter);
     updateFieldIfNotNull("accel_x",ac_x);
     updateFieldIfNotNull("accel_y",ac_y);
     updateFieldIfNotNull("speed_x",speed_x);
