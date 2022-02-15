@@ -35,7 +35,7 @@ var locat_x=0,locat_y=0;
 var timer=0,last_timer=0;
 var lowpass_x=0,highpass_x=0;
 var lowpass_y=0,highpass_y=0;
-var filter=0.9;
+var filter=0.95;
 var old_ac_x=0,old_ac_y=0;
 var old_speed_x=0,old_speed_y=0;
 function clock(){
