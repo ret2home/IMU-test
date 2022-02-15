@@ -49,9 +49,11 @@ function handleMotion(event){
     var ac_y=event.acceleration.y;
     var int=(timer-last_timer)/100;
 
+    /*
     if(Math.abs(old_ac_x-ac_x)+Math.abs(old_ac_y-ac_y)<0.01){
         return;
     }
+    */
 
     /*
     lowpass_y=lowpass_y*filter+ac_y*(1-filter);
