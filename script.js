@@ -49,12 +49,9 @@ function handleMotion(event){
     var ac_y=event.acceleration.y;
     var int=(timer-last_timer)/100;
 
-    lowpass_x=lowpass_x*filter+ac_x*(1-filter);
-    highpass_x=ac_x-lowpass_x;
-    speed_x=((highpass_x+old_ac_x)*int)/2+speed_x;
-    old_ac_x=highpass_x;
-    locat_x=((speed_x+old_speed_x)*int)/2+locat_x;
-    old_speed_x=speed_x;
+    if(Math.abs(old_ac_x-ac_x)+Math.abs(old_ac_y-ac_y)<0.1){
+        return;
+    }
 
     lowpass_y=lowpass_y*filter+ac_y*(1-filter);
     highpass_y=ac_y-lowpass_y;
