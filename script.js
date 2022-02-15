@@ -18,8 +18,14 @@ function start(){
 function updateFieldIfNotNull(fieldName,value){
     if(value!=null){
         var res=String(value.toFixed(2));
-        if(res[0]!="-")res="+"+res;
-
+        if(res[0]!="-"){
+            document.getElementById(fieldName).classList.remove("red");
+            document.getElementById(fieldName).classList.add("green");
+        }else{
+            res=res.substr(1);
+            document.getElementById(fieldName).classList.remove("green");
+            document.getElementById(fieldName).classList.add("red");
+        }
         document.getElementById(fieldName).innerHTML=res;
     }
 }
