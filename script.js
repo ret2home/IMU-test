@@ -44,8 +44,8 @@ function clock(){
 setInterval(clock,10);
 
 function handleMotion(event){
-    var ac_x=event.accelerationIncludingGravity.x;
-    var ac_y=event.accelerationIncludingGravity.y;
+    var ac_x=event.acceleration.x;
+    var ac_y=event.acceleration.y;
     var int=(timer-last_timer)/100;
 
 
