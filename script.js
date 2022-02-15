@@ -53,12 +53,21 @@ function handleMotion(event){
         return;
     }
 
+    /*
     lowpass_y=lowpass_y*filter+ac_y*(1-filter);
     highpass_y=ac_y-lowpass_y;
     speed_y=((highpass_y+old_ac_y)*int)/2+speed_y;
     old_ac_y=highpass_y;
     locat_y=((speed_y+old_speed_y)*int)/2+locat_y;
     old_speed_y=speed_y;
+    */
+   var new_speed_x=speed_x+ac_x*int;
+   locat_x+=(speed_x+new_speed_x)*int/2;
+   speed_x=new_speed_x;
+   
+   var new_speed_y=speed_y+ac_y*int;
+   locat_y+=(speed_y+new_speed_y)*int/2;
+   speed_y=new_speed_y;
 
     updateFieldIfNotNull("accel_x",ac_x);
     updateFieldIfNotNull("accel_y",ac_y);
