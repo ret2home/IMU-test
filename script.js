@@ -19,7 +19,11 @@ function updateFieldIfNotNull(fieldName,value){
         document.getElementById(fieldName).innerHTML=value.toFixed(10);
     }
 }
+
+var speed_x=0;
+var speed_y=0;
 function handleMotion(event){
     updateFieldIfNotNull("accel_x",event.acceleration.x);
     updateFieldIfNotNull("accel_y",event.acceleration.y);
+    updateFieldIfNotNull("interval",event.interval);
 }
