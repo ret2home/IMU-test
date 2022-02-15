@@ -17,7 +17,7 @@ function start(){
 
 function updateFieldIfNotNull(fieldName,value){
     if(value!=null){
-        document.getElementById(fieldName).innerHTML=value.toFixed(10);
+        document.getElementById(fieldName).innerHTML=value.toFixed(2);
     }
 }
 
@@ -32,7 +32,6 @@ var old_speed_x=0,old_speed_y=0;
 
 function clock(){
     timer++;
-    updateFieldIfNotNull("interval",timer);
 }
 setInterval(clock,10);
 
@@ -61,6 +60,6 @@ function handleMotion(event){
     updateFieldIfNotNull("speed_y",speed_y);
     updateFieldIfNotNull("locat_x",locat_x);
     updateFieldIfNotNull("locat_y",locat_y);
-    //updateFieldIfNotNull("interval",int);
+    updateFieldIfNotNull("interval",int);
     last_timer=timer;
 }
