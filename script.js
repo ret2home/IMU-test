@@ -38,6 +38,7 @@ var lowpass_y=0,highpass_y=0;
 var filter=0.9;
 var old_ac_x=0,old_ac_y=0;
 var old_speed_x=0,old_speed_y=0;
+var gosa_x=0,gosa_y=0,count=0;
 
 function clock(){
     timer++;
@@ -49,6 +50,17 @@ function handleMotion(event){
     var ac_y=event.acceleration.y;
     var int=(timer-last_timer)/100;
 
+    if(count<10){
+        gosa_x+=ac_x;
+        gosa_y+=ac_y;
+        count++;
+        return;
+    }else if(count==10){
+        gosa_x/=10;
+        gosa_y/=10;
+    }
+    ac_x-=gosa_x;
+    ac_y-=gosa_y;
     /*
     if(Math.abs(old_ac_x-ac_x)+Math.abs(old_ac_y-ac_y)<0.01){
         return;
