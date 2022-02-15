@@ -17,7 +17,10 @@ function start(){
 
 function updateFieldIfNotNull(fieldName,value){
     if(value!=null){
-        document.getElementById(fieldName).innerHTML=value.toFixed(2);
+        var res=String(value.toFixed(2));
+        if(res[0]!="-")res="+"+res;
+
+        document.getElementById(fieldName).innerHTML=res;
     }
 }
 
