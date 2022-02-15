@@ -54,6 +54,8 @@ function handleMotion(event){
     locat_y=((speed_y+old)*int)/2+locat_y;
     old_speed_y=speed_y;
 
+    alert("");
+
     updateFieldIfNotNull("accel_x",ac_x);
     updateFieldIfNotNull("accel_y",ac_y);
     updateFieldIfNotNull("speed_x",speed_x);
