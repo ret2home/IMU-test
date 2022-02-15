@@ -58,6 +58,7 @@ function handleMotion(event){
     }else if(count==1000){
         gosa_x/=1000;
         gosa_y/=1000;
+        count++;
     }
     ac_x-=gosa_x;
     ac_y-=gosa_y;
