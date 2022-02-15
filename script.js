@@ -44,17 +44,15 @@ function handleMotion(event){
     highpass_x=ac_x-lowpass_x;
     speed_x=((highpass_x+old_ac_x)*int)/2+speed_x;
     old_ac_x=highpass_x;
-    locat_x=((speed_x+old)*int)/2+locat_x;
+    locat_x=((speed_x+old_speed_x)*int)/2+locat_x;
     old_speed_x=speed_x;
 
     lowpass_y=lowpass_y*filter+ac_y*(1-filter);
     highpass_y=ac_y-lowpass_y;
     speed_y=((highpass_y+old_ac_y)*int)/2+speed_y;
     old_ac_y=highpass_y;
-    locat_y=((speed_y+old)*int)/2+locat_y;
+    locat_y=((speed_y+old_speed_y)*int)/2+locat_y;
     old_speed_y=speed_y;
-
-    alert("");
 
     updateFieldIfNotNull("accel_x",ac_x);
     updateFieldIfNotNull("accel_y",ac_y);
