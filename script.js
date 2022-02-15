@@ -44,31 +44,35 @@ function clock(){
 setInterval(clock,10);
 
 function handleMotion(event){
-    var ac_x=event.acceleration.x;
-    var ac_y=event.acceleration.y;
+    var ac_x=event.accelerationIncludingGravity.x;
+    var ac_y=event.accelerationIncludingGravity.y;
     var int=(timer-last_timer)/100;
 
-    
-    if(abs(ac_x)+abs(ac_y)<0.01){
-        return;
-    }
-    
 
-    /*
+    lowpass_x=lowpass_x*filter+ac_x*(1-filter);
+    highpass_x=ac_x-lowpass_x;
+    speed_x=((highpass_x+old_ac_x)*int)/2+speed_x;
+    old_ac_x=highpass_x;
+    locat_x=((speed_x+old_speed_x)*int)/2+locat_x;
+    old_speed_x=speed_x;
+    
     lowpass_y=lowpass_y*filter+ac_y*(1-filter);
     highpass_y=ac_y-lowpass_y;
     speed_y=((highpass_y+old_ac_y)*int)/2+speed_y;
     old_ac_y=highpass_y;
     locat_y=((speed_y+old_speed_y)*int)/2+locat_y;
     old_speed_y=speed_y;
+    
+
+    /*
+    var new_speed_x=speed_x+ac_x*int;
+    locat_x+=(speed_x+new_speed_x)*int/2;
+    speed_x=new_speed_x;
+    
+    var new_speed_y=speed_y+ac_y*int;
+    locat_y+=(speed_y+new_speed_y)*int/2;
+    speed_y=new_speed_y;
     */
-   var new_speed_x=speed_x+ac_x*int;
-   locat_x+=(speed_x+new_speed_x)*int/2;
-   speed_x=new_speed_x;
-   
-   var new_speed_y=speed_y+ac_y*int;
-   locat_y+=(speed_y+new_speed_y)*int/2;
-   speed_y=new_speed_y;
 
     updateFieldIfNotNull("accel_x",ac_x);
     updateFieldIfNotNull("accel_y",ac_y);
