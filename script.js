@@ -50,12 +50,12 @@ function handleMotion(event){
     var ac_y=event.acceleration.y;
     var int=(timer-last_timer)/100;
 
-    if(count<10){
+    if(count<1000){
         gosa_x+=ac_x;
         gosa_y+=ac_y;
         count++;
         return;
-    }else if(count==10){
+    }else if(count==1000){
         gosa_x/=10;
         gosa_y/=10;
     }
