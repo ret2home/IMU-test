@@ -49,7 +49,7 @@ function handleMotion(event){
     var int=(timer-last_timer)/100;
 
     
-    if(abs(ac_x)+abs(ac_y)<0.1){
+    if(abs(ac_x)+abs(ac_y)<0.01){
         return;
     }
     
