@@ -1,5 +1,8 @@
 var is_runnning=false;
 function start(){
+    if(DeviceMotionEvent&&typeof DeviceMotionEvent.requestPermission === "function") {
+        DeviceMotionEvent.requestPermission();
+    }
     if(!is_runnning){
         window.addEventListener("devicemotion",handleMotion);
         document.getElementById("start_button").innerHTML="Stop";
