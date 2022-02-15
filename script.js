@@ -27,7 +27,7 @@ var locat_y=0;
 function handleMotion(event){
     var ac_x=event.acceleration.x;
     var ac_y=event.acceleration.y;
-    var int=event.interval;
+    var int=event.interval/1000;
     var new_speed_x=speed_x+ac_x*int;
     var new_speed_y=speed_y+ac_y*int;
     locat_x+=(speed_x+new_speed_x)*int/2;
