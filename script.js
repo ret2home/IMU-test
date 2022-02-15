@@ -17,7 +17,6 @@ function updateFieldIfNotNull(fieldName,value){
     }
 }
 function handleMotion(event){
-    alert("")
     updateFieldIfNotNull("accel_x",event.acceleration.x);
     updateFieldIfNotNull("accel_y",event.acceleration.y);
 }
