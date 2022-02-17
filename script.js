@@ -208,8 +208,8 @@ function draw(){
             ctx.strokeStyle="Black";
             ctx.arc(400,400,100*i,0,2*Math.PI);
             ctx.stroke();
-            ctx.font="12px serif";
-            ctx.fillText((String)(i*space),380+100*i,400);
+            ctx.font="16px serif";
+            ctx.fillText((String)(i*space),370+100*i,400);
         }
         ctx.beginPath();
         ctx.lineWidth="2";
