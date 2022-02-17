@@ -215,8 +215,8 @@ function draw(){
         ctx.moveTo(400,400);
         var x=0,y=0;
         for(var i=0;i<difdir.length;i++){
-            x+=0.75*Math.cos(difdir[i]/180*Math.PI);
-            y-=0.75*Math.sin(difdir[i]/180*Math.PI);
+            x-=0.75*Math.sin(difdir[i]/180*Math.PI);
+            y+=0.75*Math.cos(difdir[i]/180*Math.PI);
             ctx.lineTo(400+x*50,400-y*50);
         }
         ctx.stroke();
