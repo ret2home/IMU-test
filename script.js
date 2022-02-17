@@ -60,7 +60,6 @@ function handleMotion(event){
         }
         if(mnidx==tim.length-31&&rmx-mn>=1&&lmx-mn>=1){
             mnlis.push(tim.length-31);
-            alert("OK");
         }
     }
     updateFieldIfNotNull("accel_x",ac_x);
@@ -164,8 +163,8 @@ function draw(){
             if(x<0)break;
             let y=-accel_y[mnlis[i]]/9.8*150+300;
             ctx.beginPath();
-            ctx.lineWidth="1";
-            ctx.strokeStyle="Yellow";
+            ctx.lineWidth="3";
+            ctx.strokeStyle="Red";
             ctx.arc(x,y,10,0,2*Math.PI);
             ctx.stroke();
         }
