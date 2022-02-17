@@ -31,7 +31,7 @@ function updateFieldIfNotNull(fieldName,value){
 }
 var timer=0;
 function clock(){
-    timer++;
+    timer+=10;
 }
 setInterval(clock,10);
 
@@ -66,6 +66,7 @@ function handleMotion(event){
     updateFieldIfNotNull("accel_x",ac_x);
     updateFieldIfNotNull("accel_y",ac_y);
     updateFieldIfNotNull("accel_z",ac_z);
+    updateFieldIfNotNull("timer",timer);
 }
 
 function rand(){
@@ -110,7 +111,7 @@ function draw(){
         if(accel_x.length){
             let lasy=0;
             for(let i=accel_x.length-1;i>=0;i--){
-                let x=800-(timer-tim[i])/100*100;
+                let x=800-(timer-tim[i])/1000*100;
                 if(x<0)break;
                 let y=-accel_x[i]/9.8*150+300;
                 if(i==accel_x.length-1){
@@ -129,7 +130,7 @@ function draw(){
         if(accel_x.length){
             for(let i=accel_x.length-1;i>=0;i--){
 
-                let x=800-(timer-tim[i])/100*100;
+                let x=800-(timer-tim[i])/1000*100;
                 if(x<0)break;
                 let y=-accel_y[i]/9.8*150+300;
                 if(i==accel_x.length-1){
@@ -147,7 +148,7 @@ function draw(){
         if(accel_x.length){
             let lasy=0;
             for(let i=accel_x.length-1;i>=0;i--){
-                let x=800-(timer-tim[i])/100*100;
+                let x=800-(timer-tim[i])/1000*100;
                 if(x<0)break;
                 let y=-accel_z[i]/9.8*150+300;
                 if(i==accel_x.length-1){
@@ -161,14 +162,14 @@ function draw(){
 
         for(var i=mnlis.length-1;i>=0;i--){
             var id=mnlis[i];
-            if(tim[id]<timer-200){
+            if(tim[id]<timer-2000){
                 alert(String(tim[id])+" "+String(timer));
-                if((!i||tim[mnlis[i-1]]<tim[id]-100)&&(i==mnlis.length-1||tim[id]+100<tim[mnlis[i+1]])){
+                if((!i||tim[mnlis[i-1]]<tim[id]-1000)&&(i==mnlis.length-1||tim[id]+1000<tim[mnlis[i+1]])){
                     mnlis.splice(i,1);
                     continue;
                 }
             }
-            let x=800-(timer-tim[id])/100*100;
+            let x=800-(timer-tim[id])/1000*100;
             if(x<0)break;
             let y=-accel_y[id]/9.8*150+300;
             ctx.beginPath();
@@ -179,4 +180,4 @@ function draw(){
         }
     }
 }
-setInterval(draw,1000);
+setInterval(draw,50);
