@@ -37,9 +37,9 @@ setInterval(clock,10);
 
 var accel_x=[],accel_y=[],accel_z=[],tim=[];
 function handleMotion(event){
-    var ac_x=event.acceleration.x;
-    var ac_y=event.acceleration.y;
-    var ac_z=event.acceleration.z;
+    var ac_x=event.accelerationIncludingGravity.x;
+    var ac_y=event.accelerationIncludingGravity.y;
+    var ac_z=event.accelerationIncludingGravity.z;
 
     accel_x.push(ac_x);
     accel_y.push(ac_y);
@@ -86,6 +86,43 @@ function draw(){
                 let x=800-(tim[tim.length-1]-tim[i])/100*60;
                 if(x<0)break;
                 let y=-accel_x[i]*9.8+200;
+                if(i==accel_x.length-1){
+                    ctx.moveTo(x,y);
+                }else{
+                    ctx.lineTo(x,y);
+                }
+            }
+        }
+        ctx.stroke();
+
+
+        ctx.beginPath();
+        ctx.lineWidth="1";
+        ctx.strokeStyle="Green";
+        if(accel_x.length){
+            let lasy=0;
+            for(let i=accel_x.length-1;i>=0;i--){
+                let x=800-(tim[tim.length-1]-tim[i])/100*60;
+                if(x<0)break;
+                let y=-accel_y[i]*9.8+200;
+                if(i==accel_x.length-1){
+                    ctx.moveTo(x,y);
+                }else{
+                    ctx.lineTo(x,y);
+                }
+            }
+        }
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.lineWidth="1";
+        ctx.strokeStyle="Blue";
+        if(accel_x.length){
+            let lasy=0;
+            for(let i=accel_x.length-1;i>=0;i--){
+                let x=800-(tim[tim.length-1]-tim[i])/100*60;
+                if(x<0)break;
+                let y=-accel_z[i]*9.8+200;
                 if(i==accel_x.length-1){
                     ctx.moveTo(x,y);
                 }else{
