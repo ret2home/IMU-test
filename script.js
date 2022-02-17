@@ -77,9 +77,6 @@ function handleMotion(event){
         }
         nex_check++;
     }
-    updateFieldIfNotNull("accel_x",ac_x);
-    updateFieldIfNotNull("accel_y",ac_y);
-    updateFieldIfNotNull("accel_z",ac_z);
 }
 
 function rand(){
