@@ -110,7 +110,7 @@ function draw(){
         if(accel_x.length){
             let lasy=0;
             for(let i=accel_x.length-1;i>=0;i--){
-                let x=800-(tim[tim.length-1]-tim[i])/100*100;
+                let x=800-(timer-tim[i])/100*100;
                 if(x<0)break;
                 let y=-accel_x[i]/9.8*150+300;
                 if(i==accel_x.length-1){
@@ -129,7 +129,7 @@ function draw(){
         if(accel_x.length){
             for(let i=accel_x.length-1;i>=0;i--){
 
-                let x=800-(tim[tim.length-1]-tim[i])/100*100;
+                let x=800-(timer-tim[i])/100*100;
                 if(x<0)break;
                 let y=-accel_y[i]/9.8*150+300;
                 if(i==accel_x.length-1){
@@ -147,7 +147,7 @@ function draw(){
         if(accel_x.length){
             let lasy=0;
             for(let i=accel_x.length-1;i>=0;i--){
-                let x=800-(tim[tim.length-1]-tim[i])/100*100;
+                let x=800-(timer-tim[i])/100*100;
                 if(x<0)break;
                 let y=-accel_z[i]/9.8*150+300;
                 if(i==accel_x.length-1){
@@ -159,16 +159,15 @@ function draw(){
         }
         ctx.stroke();
 
-        for(var i=mnlis.length-1;i>=0;){
+        for(var i=mnlis.length-1;i>=0;i--){
             var id=mnlis[i];
             if(tim[id]<timer-200){
                 if((!i||tim[mnlis[i-1]]<tim[id]-100)&&(i==mnlis.length-1||tim[id]+100<tim[mnlis[i+1]])){
                     mnlis.splice(i,1);
-                    alert("OK");
                     continue;
                 }
             }
-            let x=800-(tim[tim.length-1]-tim[id])/100*100;
+            let x=800-(timer-tim[id])/100*100;
             if(x<0)break;
             let y=-accel_y[id]/9.8*150+300;
             ctx.beginPath();
