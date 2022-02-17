@@ -35,7 +35,7 @@ function clock(){
 }
 setInterval(clock,10);
 
-var accel_x=[],accel_y=[],accel_z=[],tim=[];
+var accel_x=[],accel_y=[],accel_z=[],tim=[],mnlis=[];
 function handleMotion(event){
     var ac_x=event.accelerationIncludingGravity.x;
     var ac_y=event.accelerationIncludingGravity.y;
@@ -45,6 +45,23 @@ function handleMotion(event){
     accel_y.push(ac_y);
     accel_z.push(ac_z);
     tim.push(timer);
+    if(tim.length>=61){
+        var lmx=-100,rmx=-100,mn=100,mnidx;
+        for(var i=tim.length-61;i<tim.length;i++){
+            if(i<tim.length-30){
+                lmx=max(lmx,accel_y[i]);
+            }else{
+                rmx=max(rmx,accel_y[i]);
+            }
+            if(accel_y[i]<mn){
+                mn=accel_y[i];
+                mnidx=i;
+            }
+        }
+        if(mnidx==tim.length-31&&rmx-mn>=1&&lmx-mn>=1){
+            mnlis.push(tim.length-31);
+        }
+    }
     updateFieldIfNotNull("accel_x",ac_x);
     updateFieldIfNotNull("accel_y",ac_y);
     updateFieldIfNotNull("accel_z",ac_z);
@@ -109,8 +126,8 @@ function draw(){
         ctx.lineWidth="1";
         ctx.strokeStyle="Green";
         if(accel_x.length){
-            let lasy=0;
             for(let i=accel_x.length-1;i>=0;i--){
+
                 let x=800-(tim[tim.length-1]-tim[i])/100*100;
                 if(x<0)break;
                 let y=-accel_y[i]/9.8*150+300;
@@ -140,6 +157,17 @@ function draw(){
             }
         }
         ctx.stroke();
+
+        for(var i=mnlis.length-1;i>=0;i--){
+            let x=800-(tim[tim.length-1]-tim[mnlis[i]])/100*100;
+            if(x<0)break;
+            let y=-accel_y[mnlis[i]]/9.8*150+300;
+            ctx.beginPath();
+            ctx.lineWidth="1";
+            ctx.strokeStyle="Yellow";
+            ctx.arc(x,y,3,0,2*Math.PI);
+            ctx.stroke();
+        }
     }
 }
 setInterval(draw,50);
