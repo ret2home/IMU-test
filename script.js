@@ -5,11 +5,13 @@ function start(){
     }
     if(!is_runnning){
         window.addEventListener("devicemotion",handleMotion);
+        window.addEventListener("deviceorientation",handleOrientation);
         document.getElementById("start_button").innerHTML="Stop";
         is_runnning=true;
         last_Date.now()=Date.now();
     }else{
         window.removeEventListener("devicemotion",handleMotion);
+        window.removeEventListener("deviceorientation",handleOrientation);
         document.getElementById("start_button").innerHTML="Start";
         is_runnning=false;
     }
@@ -30,9 +32,16 @@ function updateFieldIfNotNull(fieldName,value){
     }
 }
 
-var accel_x=[],accel_y=[],accel_z=[],tim=[],mnlis=[];
+var lasori=-1;
+function handleOrientation(event){
+    lasori=event.gamma;
+    updateFieldIfNotNull("orientation",lasori);
+}
+
+var accel_x=[],accel_y=[],accel_z=[],tim=[],mnlis=[],dir=[];
 var nex_check=0;
 function handleMotion(event){
+    if(lasori==-1)return;
     var ac_x=event.accelerationIncludingGravity.x;
     var ac_y=event.accelerationIncludingGravity.y;
     var ac_z=event.accelerationIncludingGravity.z;
@@ -41,6 +50,7 @@ function handleMotion(event){
     accel_y.push(ac_y);
     accel_z.push(ac_z);
     tim.push(Date.now());
+    dir.push(lasori);
 
     while(nex_check<accel_x.length&&tim[nex_check]<Date.now()-250){
         var l=nex_check,mxl=accel_y[nex_check];
@@ -70,7 +80,6 @@ function handleMotion(event){
     updateFieldIfNotNull("accel_x",ac_x);
     updateFieldIfNotNull("accel_y",ac_y);
     updateFieldIfNotNull("accel_z",ac_z);
-    updateFieldIfNotNull("timer",tim.length);
 }
 
 function rand(){
@@ -80,6 +89,8 @@ function rand(){
     tim.push(Date.now());
 }
 //setInterval(rand,100);
+
+var difdir=[];
 
 function draw(){
     if(!is_runnning)return;
@@ -167,10 +178,11 @@ function draw(){
         for(var i=mnlis.length-1;i>=0;i--){
             var id=mnlis[i];
             if(tim[id]<Date.now()-2000){
-                if((!i||tim[mnlis[i-1]]<tim[id]-1000)&&(i==mnlis.length-1||tim[id]+1000<tim[mnlis[i+1]])){
+                if((!i||tim[mnlis[i-1]]<tim[id]-800)&&(i==mnlis.length-1||tim[id]+800<tim[mnlis[i+1]])){
                     mnlis.splice(i,1);
                     continue;
                 }
+                difdir.push(dir[id]);
             }
             let x=800-(Date.now()-tim[id])/1000*100;
             if(x<0)break;
@@ -181,6 +193,30 @@ function draw(){
             ctx.arc(x,y,10,0,2*Math.PI);
             ctx.stroke();
         }
+    }
+    canvas=document.getElementById("canvas2");
+
+    if(canvas.getContext){
+        var ctx=canvas.getContext('2d');
+        ctx.clearRect(0,0,800,800);
+        for(var i=1;i<=4;i++){
+            ctx.beginPath();
+            ctx.lineWidth="0.5";
+            ctx.strokeStyle="Black";
+            ctx.arc(400,400,100*i,2*Math.PI);
+            ctx.stroke();
+        }
+        ctx.beginPath();
+        ctx.lineWidth="2";
+        ctx.strokeStyle="Red";
+        ctx.moveTo(400,400);
+        var x=400,y=400;
+        for(var i=0;i<difdir.length;i++){
+            x+=75*Math.cos(difdir[i]/180*Math.PI);
+            y-=75*Math.sin(difdir[i]/180*Math.PI);
+            ctx.lineTo(x,y);
+        }
+        ctx.stroke();
     }
 }
 setInterval(draw,50);
