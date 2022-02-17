@@ -203,7 +203,7 @@ function draw(){
             ctx.beginPath();
             ctx.lineWidth="0.5";
             ctx.strokeStyle="Black";
-            ctx.arc(400,400,100*i,2*Math.PI);
+            ctx.arc(400,400,100*i,0,2*Math.PI);
             ctx.stroke();
         }
         ctx.beginPath();
