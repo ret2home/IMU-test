@@ -179,4 +179,4 @@ function draw(){
         }
     }
 }
-setInterval(draw,100);
+setInterval(draw,1000);
