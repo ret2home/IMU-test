@@ -49,9 +49,9 @@ function handleMotion(event){
         var lmx=-100,rmx=-100,mn=100,mnidx;
         for(var i=tim.length-61;i<tim.length;i++){
             if(i<tim.length-30){
-                lmx=max(lmx,accel_y[i]);
+                lmx=Math.max(lmx,accel_y[i]);
             }else{
-                rmx=max(rmx,accel_y[i]);
+                rmx=Math.max(rmx,accel_y[i]);
             }
             if(accel_y[i]<mn){
                 mn=accel_y[i];
