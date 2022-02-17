@@ -34,7 +34,7 @@ function updateFieldIfNotNull(fieldName,value){
 
 var lasori=-1;
 function handleOrientation(event){
-    lasori=event.gamma;
+    lasori=event.alpha;
     updateFieldIfNotNull("orientation",lasori);
 }
 
