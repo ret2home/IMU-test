@@ -56,7 +56,7 @@ function handleMotion(event){
         }
         while(r<accel_x.length-1&&tim[r+1]<tim[nex_check]+250){
             mxr=Math.max(mxr,accel_y[r+1]);
-            if(ac_y[r+1]<mn){
+            if(accel_y[r+1]<mn){
                 mn=accel_y[r+1];
                 mnidx=r+1;
             }
