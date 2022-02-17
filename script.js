@@ -90,7 +90,7 @@ function rand(){
 }
 //setInterval(rand,100);
 
-var difdir=[],laspush_difdir=-1;
+var difdir=[],laspush_difdir=-1,space=5;
 
 function draw(){
     if(!is_runnning)return;
@@ -208,8 +208,8 @@ function draw(){
             ctx.strokeStyle="Black";
             ctx.arc(400,400,100*i,0,2*Math.PI);
             ctx.stroke();
-            ctx.font="11px serif";
-            ctx.fillText((String)(i*space),420+100*i,400);
+            ctx.font="12px serif";
+            ctx.fillText((String)(i*space),380+100*i,400);
         }
         ctx.beginPath();
         ctx.lineWidth="2";
@@ -225,6 +225,7 @@ function draw(){
         mx=Math.floor((mx+19)/20)*20;
         if(mx==0)mx=20;
         updateFieldIfNotNull("space",mx/4);
+        space=mx/4;
         for(var i=0;i<difdir.length;i++){
             x-=0.75*Math.sin(difdir[i]/180*Math.PI);
             y+=0.75*Math.cos(difdir[i]/180*Math.PI);
