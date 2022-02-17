@@ -90,7 +90,7 @@ function rand(){
 }
 //setInterval(rand,100);
 
-var difdir=[];
+var difdir=[],laspush_difdir=-1;
 
 function draw(){
     if(!is_runnning)return;
@@ -182,7 +182,10 @@ function draw(){
                     mnlis.splice(i,1);
                     continue;
                 }
-                difdir.push(dir[id]);
+                if(laspush_difdir<id){
+                    difdir.push(dir[id]);
+                    laspush_difdir=id;
+                }
             }
             let x=800-(Date.now()-tim[id])/1000*100;
             if(x<0)break;
