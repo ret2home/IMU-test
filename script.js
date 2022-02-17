@@ -213,11 +213,20 @@ function draw(){
         ctx.lineWidth="2";
         ctx.strokeStyle="Red";
         ctx.moveTo(400,400);
-        var x=0,y=0;
+        var x=0,y=0,mx=0;
         for(var i=0;i<difdir.length;i++){
             x-=0.75*Math.sin(difdir[i]/180*Math.PI);
             y+=0.75*Math.cos(difdir[i]/180*Math.PI);
-            ctx.lineTo(400+x*50,400-y*50);
+            mx=Math.max(mx,Math.abs(x),Math.abs(y));
+        }
+        x=0,y=0,mx=Math.round(mx);
+        mx=Math.floor((mx+3)/4)*4;
+        if(mx==0)mx=4;
+        updateFieldIfNotNull("space",mx/4);
+        for(var i=0;i<difdir.length;i++){
+            x-=0.75*Math.sin(difdir[i]/180*Math.PI);
+            y+=0.75*Math.cos(difdir[i]/180*Math.PI);
+            ctx.lineTo(400+x/mx*400,400-y/mx*400);
         }
         ctx.stroke();
         updateFieldIfNotNull("locate_x",x);
