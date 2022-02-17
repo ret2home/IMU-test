@@ -60,6 +60,7 @@ function handleMotion(event){
                 mn=ac_y[r+1];
                 mnidx=r+1;
             }
+            r++;
         }
         if(mnidx==nex_check&&mxl-mn>=0.8&&mxr-mn>=0.8){
             mnlis.push(nex_check);
