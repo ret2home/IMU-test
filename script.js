@@ -209,7 +209,7 @@ function draw(){
             ctx.arc(400,400,100*i,0,2*Math.PI);
             ctx.stroke();
             ctx.font="24px serif";
-            ctx.fillText((String)(i*space),350+100*i,400);
+            ctx.fillText((String)(i*space),360+100*i,400);
         }
         ctx.beginPath();
         ctx.lineWidth="2";
