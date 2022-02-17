@@ -58,9 +58,10 @@ function handleMotion(event){
                 mnidx=i;
             }
         }
-        if(mnidx==tim.length-31&&rmx-mn>=1&&lmx-mn>=1){
+        if(mnidx==tim.length-31&&rmx-mn>=0.8&&lmx-mn>=0.8){
             mnlis.push(tim.length-31);
         }
+
     }
     updateFieldIfNotNull("accel_x",ac_x);
     updateFieldIfNotNull("accel_y",ac_y);
@@ -158,15 +159,22 @@ function draw(){
         }
         ctx.stroke();
 
-        for(var i=mnlis.length-1;i>=0;i--){
-            let x=800-(tim[tim.length-1]-tim[mnlis[i]])/100*100;
+        for(var i=mnlis.length-1;i>=0;){
+            var id=mnlis[i];
+            if(tim[id]<timer-200){
+                if((!i||tim[mnlis[i-1]]<tim[id]-100)&&(i==mnlis.length-1||tim[id]+100<tim[i+1])){
+                    mnlis.splice(i,1);continue;
+                }
+            }
+            let x=800-(tim[tim.length-1]-tim[id])/100*100;
             if(x<0)break;
-            let y=-accel_y[mnlis[i]]/9.8*150+300;
+            let y=-accel_y[id]/9.8*150+300;
             ctx.beginPath();
             ctx.lineWidth="3";
             ctx.strokeStyle="Red";
             ctx.arc(x,y,10,0,2*Math.PI);
             ctx.stroke();
+            i--;
         }
     }
 }
