@@ -43,26 +43,25 @@ function handleMotion(event){
     tim.push(Date.now());
 
     while(nex_check<accel_x.length&&tim[nex_check]<Date.now()-250){
-        var l=nex_check,mxl=ac_y[nex_check];
+        var l=nex_check,mxl=accel_y[nex_check];
         var r=nex_check,mxr=mxl;
         var mn=mxl,mnidx=nex_check;
         while(l>0&&tim[l-1]>tim[nex_check]-250){
-            mxl=Math.max(mxl,ac_y[l-1]);
-            if(ac_y[l-1]<mn){
-                mn=ac_y[l-1];
+            mxl=Math.max(mxl,accel_y[l-1]);
+            if(accel_y[l-1]<mn){
+                mn=accel_y[l-1];
                 mnidx=l-1;
             }
             l--;
         }
         while(r<accel_x.length-1&&tim[r+1]<tim[nex_check]+250){
-            mxr=Math.max(mxr,ac_y[r+1]);
+            mxr=Math.max(mxr,accel_y[r+1]);
             if(ac_y[r+1]<mn){
-                mn=ac_y[r+1];
+                mn=accel_y[r+1];
                 mnidx=r+1;
             }
             r++;
         }
-        alert(String(mxl)+" "+String(mxr)+" "+String(mn));
         if(mnidx==nex_check&&mxl-mn>=0.8&&mxr-mn>=0.8){
             mnlis.push(nex_check);
         }
