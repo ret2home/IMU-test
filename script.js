@@ -157,7 +157,6 @@ function draw(){
         for(var i=mnlis.length-1;i>=0;i--){
             var id=mnlis[i];
             if(tim[id]<Date.now()-2000){
-                alert(String(tim[id])+" "+String(Date.now()));
                 if((!i||tim[mnlis[i-1]]<tim[id]-1000)&&(i==mnlis.length-1||tim[id]+1000<tim[mnlis[i+1]])){
                     mnlis.splice(i,1);
                     continue;
