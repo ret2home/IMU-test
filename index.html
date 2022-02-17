@@ -4,11 +4,13 @@
         body{
             margin: 100px;
         }
-        .button{
+        #start_button{
             width: 100px;
             height: 50px;
+            font-size: 1.5em;
         }
         li{
+            font-size: 2em;
             margin: 10px;
         }
         *{
@@ -22,12 +24,12 @@
         }
     </style>
     <body>
-        <button onclick="start()" class="button">Start</button>
+        <button onclick="start()" id="start_button">Start</button>
         <ul>
             <li>Accel_x : <span id="accel_x"></span></li>
             <li>Accel_y : <span id="accel_y"></span></li>
             <li>Accel_z : <span id="accel_z"></span></li>
         </ul>
-        <canvas id="canvas" width="800" height="400"></canvas>
+        <canvas id="canvas" width="800" height="600"></canvas>
     </body>
 </html>

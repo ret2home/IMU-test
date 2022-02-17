@@ -59,30 +59,31 @@ function rand(){
 //setInterval(rand,100);
 
 function draw(){
+    if(!is_runnning)return;
     var canvas=document.getElementById("canvas");
     if(canvas.getContext){
         var ctx=canvas.getContext('2d');
-        ctx.clearRect(0,0,800,400);
+        ctx.clearRect(0,0,800,600);
         ctx.beginPath();
         ctx.lineWidth="2";
         ctx.strokeStyle="Black";
-        ctx.moveTo(0,200);
-        ctx.lineTo(1000,200);
-        ctx.stroke();
-
-
-        ctx.beginPath();
-        ctx.lineWidth="0.5";
-        ctx.strokeStyle="Black";
-        ctx.moveTo(0,100);
-        ctx.lineTo(1000,100);
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.lineWidth="0.5";
-        ctx.strokeStyle="Black";
         ctx.moveTo(0,300);
-        ctx.lineTo(1000,300);
+        ctx.lineTo(800,300);
+        ctx.stroke();
+
+
+        ctx.beginPath();
+        ctx.lineWidth="0.5";
+        ctx.strokeStyle="Black";
+        ctx.moveTo(0,150);
+        ctx.lineTo(800,150);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.lineWidth="0.5";
+        ctx.strokeStyle="Black";
+        ctx.moveTo(0,450);
+        ctx.lineTo(800,450);
         ctx.stroke();
 
         ctx.beginPath();
@@ -91,9 +92,9 @@ function draw(){
         if(accel_x.length){
             let lasy=0;
             for(let i=accel_x.length-1;i>=0;i--){
-                let x=800-(tim[tim.length-1]-tim[i])/100*60;
+                let x=800-(tim[tim.length-1]-tim[i])/100*160;
                 if(x<0)break;
-                let y=-accel_x[i]*9.8+200;
+                let y=-accel_x[i]*9.8+300;
                 if(i==accel_x.length-1){
                     ctx.moveTo(x,y);
                 }else{
@@ -112,7 +113,7 @@ function draw(){
             for(let i=accel_x.length-1;i>=0;i--){
                 let x=800-(tim[tim.length-1]-tim[i])/100*60;
                 if(x<0)break;
-                let y=-accel_y[i]*9.8+200;
+                let y=-accel_y[i]*9.8+300;
                 if(i==accel_x.length-1){
                     ctx.moveTo(x,y);
                 }else{
@@ -130,7 +131,7 @@ function draw(){
             for(let i=accel_x.length-1;i>=0;i--){
                 let x=800-(tim[tim.length-1]-tim[i])/100*60;
                 if(x<0)break;
-                let y=-accel_z[i]*9.8+200;
+                let y=-accel_z[i]*9.8+300;
                 if(i==accel_x.length-1){
                     ctx.moveTo(x,y);
                 }else{
