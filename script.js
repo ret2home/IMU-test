@@ -163,7 +163,9 @@ function draw(){
             var id=mnlis[i];
             if(tim[id]<timer-200){
                 if((!i||tim[mnlis[i-1]]<tim[id]-100)&&(i==mnlis.length-1||tim[id]+100<tim[i+1])){
-                    mnlis.splice(i,1);continue;
+                    mnlis.splice(i,1);
+                    alert("OK");
+                    continue;
                 }
             }
             let x=800-(tim[tim.length-1]-tim[id])/100*100;
