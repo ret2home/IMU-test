@@ -62,7 +62,7 @@ function handleMotion(event){
             }
             r++;
         }
-        alert(String(l)+" "+String(r)+" "+String(mnidx));
+        alert(String(l)+" "+String(r)+" "+String(mnidx)+" "+String(nex_check));
         if(mnidx==nex_check&&mxl-mn>=0.8&&mxr-mn>=0.8){
             mnlis.push(nex_check);
         }
