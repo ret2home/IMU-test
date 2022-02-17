@@ -220,8 +220,8 @@ function draw(){
             mx=Math.max(mx,Math.sqrt(x*x+y*y));
         }
         x=0,y=0,mx=Math.ceil(mx);
-        mx=Math.floor((mx+3)/4)*4;
-        if(mx==0)mx=4;
+        mx=Math.floor((mx+19)/20)*20;
+        if(mx==0)mx=20;
         updateFieldIfNotNull("space",mx/4);
         for(var i=0;i<difdir.length;i++){
             x-=0.75*Math.sin(difdir[i]/180*Math.PI);
