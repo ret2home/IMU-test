@@ -162,6 +162,7 @@ function draw(){
         for(var i=mnlis.length-1;i>=0;i--){
             var id=mnlis[i];
             if(tim[id]<timer-200){
+                alert("OK");
                 if((!i||tim[mnlis[i-1]]<tim[id]-100)&&(i==mnlis.length-1||tim[id]+100<tim[mnlis[i+1]])){
                     mnlis.splice(i,1);
                     continue;
