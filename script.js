@@ -31,6 +31,7 @@ function updateFieldIfNotNull(fieldName,value){
 }
 
 var accel_x=[],accel_y=[],accel_z=[],tim=[],mnlis=[];
+var nex_check=0;
 function handleMotion(event){
     var ac_x=event.accelerationIncludingGravity.x;
     var ac_y=event.accelerationIncludingGravity.y;
@@ -40,23 +41,30 @@ function handleMotion(event){
     accel_y.push(ac_y);
     accel_z.push(ac_z);
     tim.push(Date.now());
-    if(tim.length>=61){
-        var lmx=-100,rmx=-100,mn=100,mnidx;
-        for(var i=tim.length-61;i<tim.length;i++){
-            if(i<tim.length-30){
-                lmx=Math.max(lmx,accel_y[i]);
-            }else{
-                rmx=Math.max(rmx,accel_y[i]);
-            }
-            if(accel_y[i]<mn){
-                mn=accel_y[i];
-                mnidx=i;
-            }
-        }
-        if(mnidx==tim.length-31&&rmx-mn>=0.8&&lmx-mn>=0.8){
-            mnlis.push(tim.length-31);
-        }
 
+    while(nex_check<accel_x.length&&tim[nex_check]<Date.now()-250){
+        var l=nex_check,mxl=ac_y[nex_check];
+        var r=nex_check,mxr=mxl;
+        var mn=mxl,mnidx=nex_check;
+        while(l>0&&tim[l-1]>tim[nex_check]-250){
+            mxl=Math.max(mxl,ac_y[l-1]);
+            if(ac_y[l-1]<mn){
+                mn=ac_y[l-1];
+                mnidx=l-1;
+            }
+            l--;
+        }
+        while(r<accel_x.length-1&&tim[r+1]<tim[nex_check]+250){
+            mxr=Math.max(mxr,ac_y[r+1]);
+            if(ac_y[r+1]<mn){
+                mn=ac_y[r+1];
+                mnidx=r+1;
+            }
+        }
+        if(mnidx==nex_check&&mxl-mn>=0.8&&mxr-mn>=0.8){
+            mnlis.push(nex_check);
+        }
+        nex_check++;
     }
     updateFieldIfNotNull("accel_x",ac_x);
     updateFieldIfNotNull("accel_y",ac_y);
