@@ -210,13 +210,15 @@ function draw(){
         ctx.lineWidth="2";
         ctx.strokeStyle="Red";
         ctx.moveTo(400,400);
-        var x=400,y=400;
+        var x=0,y=0;
         for(var i=0;i<difdir.length;i++){
             x+=75*Math.cos(difdir[i]/180*Math.PI);
             y-=75*Math.sin(difdir[i]/180*Math.PI);
-            ctx.lineTo(x,y);
+            ctx.lineTo(400+x,400-y);
         }
         ctx.stroke();
+        updateFieldIfNotNull("locate_x",x);
+        updateFieldIfNotNull("locate_y",y);
     }
 }
 setInterval(draw,50);
