@@ -7,7 +7,7 @@ function start(){
         window.addEventListener("devicemotion",handleMotion);
         document.getElementById("start_button").innerHTML="Stop";
         is_runnning=true;
-        last_timer=timer;
+        last_Date.now()=Date.now();
     }else{
         window.removeEventListener("devicemotion",handleMotion);
         document.getElementById("start_button").innerHTML="Start";
@@ -29,11 +29,6 @@ function updateFieldIfNotNull(fieldName,value){
         document.getElementById(fieldName).innerHTML=res;
     }
 }
-var timer=0;
-function clock(){
-    timer+=10;
-}
-setInterval(clock,10);
 
 var accel_x=[],accel_y=[],accel_z=[],tim=[],mnlis=[];
 function handleMotion(event){
@@ -44,7 +39,7 @@ function handleMotion(event){
     accel_x.push(ac_x);
     accel_y.push(ac_y);
     accel_z.push(ac_z);
-    tim.push(timer);
+    tim.push(Date.now());
     if(tim.length>=61){
         var lmx=-100,rmx=-100,mn=100,mnidx;
         for(var i=tim.length-61;i<tim.length;i++){
@@ -66,14 +61,13 @@ function handleMotion(event){
     updateFieldIfNotNull("accel_x",ac_x);
     updateFieldIfNotNull("accel_y",ac_y);
     updateFieldIfNotNull("accel_z",ac_z);
-    updateFieldIfNotNull("timer",timer);
 }
 
 function rand(){
     accel_x.push(Math.random()*19.6-9.8);
     accel_y.push(Math.random()*19.6-9.8);
     accel_z.push(Math.random()*19.6-9.8);
-    tim.push(timer);
+    tim.push(Date.now());
 }
 //setInterval(rand,100);
 
@@ -111,7 +105,7 @@ function draw(){
         if(accel_x.length){
             let lasy=0;
             for(let i=accel_x.length-1;i>=0;i--){
-                let x=800-(timer-tim[i])/1000*100;
+                let x=800-(Date.now()-tim[i])/1000*100;
                 if(x<0)break;
                 let y=-accel_x[i]/9.8*150+300;
                 if(i==accel_x.length-1){
@@ -130,7 +124,7 @@ function draw(){
         if(accel_x.length){
             for(let i=accel_x.length-1;i>=0;i--){
 
-                let x=800-(timer-tim[i])/1000*100;
+                let x=800-(Date.now()-tim[i])/1000*100;
                 if(x<0)break;
                 let y=-accel_y[i]/9.8*150+300;
                 if(i==accel_x.length-1){
@@ -148,7 +142,7 @@ function draw(){
         if(accel_x.length){
             let lasy=0;
             for(let i=accel_x.length-1;i>=0;i--){
-                let x=800-(timer-tim[i])/1000*100;
+                let x=800-(Date.now()-tim[i])/1000*100;
                 if(x<0)break;
                 let y=-accel_z[i]/9.8*150+300;
                 if(i==accel_x.length-1){
@@ -162,14 +156,14 @@ function draw(){
 
         for(var i=mnlis.length-1;i>=0;i--){
             var id=mnlis[i];
-            if(tim[id]<timer-2000){
-                alert(String(tim[id])+" "+String(timer));
+            if(tim[id]<Date.now()-2000){
+                alert(String(tim[id])+" "+String(Date.now()));
                 if((!i||tim[mnlis[i-1]]<tim[id]-1000)&&(i==mnlis.length-1||tim[id]+1000<tim[mnlis[i+1]])){
                     mnlis.splice(i,1);
                     continue;
                 }
             }
-            let x=800-(timer-tim[id])/1000*100;
+            let x=800-(Date.now()-tim[id])/1000*100;
             if(x<0)break;
             let y=-accel_y[id]/9.8*150+300;
             ctx.beginPath();
