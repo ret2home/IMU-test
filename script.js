@@ -92,7 +92,7 @@ function draw(){
         if(accel_x.length){
             let lasy=0;
             for(let i=accel_x.length-1;i>=0;i--){
-                let x=800-(tim[tim.length-1]-tim[i])/100*160;
+                let x=800-(tim[tim.length-1]-tim[i])/100*100;
                 if(x<0)break;
                 let y=-accel_x[i]/9.8*150+300;
                 if(i==accel_x.length-1){
@@ -111,7 +111,7 @@ function draw(){
         if(accel_x.length){
             let lasy=0;
             for(let i=accel_x.length-1;i>=0;i--){
-                let x=800-(tim[tim.length-1]-tim[i])/100*160;
+                let x=800-(tim[tim.length-1]-tim[i])/100*100;
                 if(x<0)break;
                 let y=-accel_y[i]/9.8*150+300;
                 if(i==accel_x.length-1){
@@ -129,7 +129,7 @@ function draw(){
         if(accel_x.length){
             let lasy=0;
             for(let i=accel_x.length-1;i>=0;i--){
-                let x=800-(tim[tim.length-1]-tim[i])/100*160;
+                let x=800-(tim[tim.length-1]-tim[i])/100*100;
                 if(x<0)break;
                 let y=-accel_z[i]/9.8*150+300;
                 if(i==accel_x.length-1){
@@ -142,4 +142,4 @@ function draw(){
         ctx.stroke();
     }
 }
-setInterval(draw,100);
+setInterval(draw,50);
