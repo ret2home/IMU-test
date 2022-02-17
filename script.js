@@ -44,11 +44,19 @@ function handleMotion(event){
     accel_x.push(ac_x);
     accel_y.push(ac_y);
     accel_z.push(ac_z);
+    tim.push(timer);
     updateFieldIfNotNull("accel_x",ac_x);
     updateFieldIfNotNull("accel_y",ac_y);
     updateFieldIfNotNull("accel_z",ac_z);
 }
 
+function rand(){
+    accel_x.push(Math.random()*19.6-9.8);
+    accel_y.push(Math.random()*19.6-9.8);
+    accel_z.push(Math.random()*19.6-9.8);
+    tim.push(timer);
+}
+//setInterval(rand,100);
 
 function draw(){
     var canvas=document.getElementById("canvas");
