@@ -61,6 +61,7 @@ function handleMotion(event){
     updateFieldIfNotNull("accel_x",ac_x);
     updateFieldIfNotNull("accel_y",ac_y);
     updateFieldIfNotNull("accel_z",ac_z);
+    updateFieldIfNotNull("timer",tim.length);
 }
 
 function rand(){
