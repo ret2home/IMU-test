@@ -217,9 +217,9 @@ function draw(){
         for(var i=0;i<difdir.length;i++){
             x-=0.75*Math.sin(difdir[i]/180*Math.PI);
             y+=0.75*Math.cos(difdir[i]/180*Math.PI);
-            mx=Math.max(mx,Math.abs(x),Math.abs(y));
+            mx=Math.max(mx,Math.sqrt(x*x+y*y));
         }
-        x=0,y=0,mx=Math.round(mx);
+        x=0,y=0,mx=Math.ceil(mx);
         mx=Math.floor((mx+3)/4)*4;
         if(mx==0)mx=4;
         updateFieldIfNotNull("space",mx/4);
