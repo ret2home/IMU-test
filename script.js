@@ -221,7 +221,6 @@ function draw(){
         x=0,y=0,mx=Math.ceil(mx);
         mx=Math.floor((mx+19)/20)*20;
         if(mx==0)mx=20;
-        updateFieldIfNotNull("space",mx/4);
         space=mx/4;
         for(var i=0;i<difdir.length;i++){
             x-=0.75*Math.sin(difdir[i]/180*Math.PI);
