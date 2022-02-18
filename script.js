@@ -223,8 +223,8 @@ function draw(){
         if(mx==0)mx=20;
         space=mx/4;
         for(var i=0;i<difdir.length;i++){
-            x-=0.75*Math.sin(difdir[i]/180*Math.PI);
-            y+=0.75*Math.cos(difdir[i]/180*Math.PI);
+            x-=0.7*Math.sin(difdir[i]/180*Math.PI);
+            y+=0.7*Math.cos(difdir[i]/180*Math.PI);
             ctx.lineTo(400+x/mx*400,400-y/mx*400);
         }
         ctx.stroke();
