@@ -1,4 +1,5 @@
 var is_runnning=false;
+var start_time;
 function start(){
     if(DeviceMotionEvent&&typeof DeviceMotionEvent.requestPermission === "function") {
         DeviceMotionEvent.requestPermission();
@@ -8,7 +9,7 @@ function start(){
         window.addEventListener("deviceorientation",handleOrientation);
         document.getElementById("start_button").innerHTML="Stop";
         is_runnning=true;
-        last_Date.now()=Date.now();
+        start_time=Date.now();
     }else{
         window.removeEventListener("devicemotion",handleMotion);
         window.removeEventListener("deviceorientation",handleOrientation);
@@ -231,5 +232,7 @@ function draw(){
         updateFieldIfNotNull("locate_x",x);
         updateFieldIfNotNull("locate_y",y);
     }
+    updateFieldIfNotNull("timer",(Date.now()-start_time)/1000);
+    updateFieldIfNotNull("counter",mnlis.length);
 }
 setInterval(draw,50);
